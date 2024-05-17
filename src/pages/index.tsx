@@ -1,118 +1,166 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Table,
+  TableBody,
+  TableBodyRow,
+  TableCell,
+  TableHead,
+  TableHeadCell,
+  TableRow,
+} from "@/components/ui/table";
+import { Store } from "@/types";
 
-const inter = Inter({ subsets: ["latin"] });
+const mockData: Store[] = [
+  {
+    id: 1,
+    manager: "manager 1",
+    capacity: 1,
+    piecesIds: [1],
+    exitVoucherIds: [1],
+    accessoireIds: [1],
+    createdAt: "2021-10-01",
+    updatedAt: "2021-10-01",
+  },
+  {
+    id: 2,
+    manager: "manager 2",
+    capacity: 2,
+    piecesIds: [2],
+    exitVoucherIds: [2],
+    accessoireIds: [2],
+    createdAt: "2021-10-02",
+    updatedAt: "2021-10-02",
+  },
+  {
+    id: 3,
+    manager: "manager 3",
+    capacity: 3,
+    piecesIds: [3],
+    exitVoucherIds: [3],
+    accessoireIds: [3],
+    createdAt: "2021-10-03",
+    updatedAt: "2021-10-03",
+  },
+  {
+    id: 4,
+    manager: "manager 4",
+    capacity: 4,
+    piecesIds: [4],
+    exitVoucherIds: [4],
+    accessoireIds: [4],
+    createdAt: "2021-10-04",
+    updatedAt: "2021-10-04",
+  },
+  {
+    id: 5,
+    manager: "manager 5",
+    capacity: 5,
+    piecesIds: [5],
+    exitVoucherIds: [5],
+    accessoireIds: [5],
+    createdAt: "2021-10-05",
+    updatedAt: "2021-10-05",
+  },
+  {
+    id: 6,
+    manager: "manager 6",
+    capacity: 6,
+    piecesIds: [6],
+    exitVoucherIds: [6],
+    accessoireIds: [6],
+    createdAt: "2021-10-06",
+    updatedAt: "2021-10-06",
+  },
+  {
+    id: 7,
+    manager: "manager 7",
+    capacity: 7,
+    piecesIds: [7],
+    exitVoucherIds: [7],
+    accessoireIds: [7],
+    createdAt: "2021-10-07",
+    updatedAt: "2021-10-07",
+  },
+  {
+    id: 8,
+    manager: "manager 8",
+    capacity: 8,
+    piecesIds: [8],
+    exitVoucherIds: [8],
+    accessoireIds: [8],
+    createdAt: "2021-10-08",
+    updatedAt: "2021-10-08",
+  },
+  {
+    id: 9,
+    manager: "manager 9",
+    capacity: 9,
+    piecesIds: [9],
+    exitVoucherIds: [9],
+    accessoireIds: [9],
+    createdAt: "2021-10-09",
+    updatedAt: "2021-10-09",
+  },
+  {
+    id: 10,
+    manager: "manager 10",
+    capacity: 10,
+    piecesIds: [10],
+    exitVoucherIds: [10],
+    accessoireIds: [10],
+    createdAt: "2021-10-10",
+    updatedAt: "2021-10-10",
+  },
+];
 
 export default function Home() {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="p-8">
+      <div className="flex justify-between items-center">
+        <div className="">
+          <h1 className="text-lg font-bold mb-2">Magasin</h1>
+          <p className="text-sm text-gray-500 max-w-[55ch]">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit,
+            quae vero. Voluptas adipisci praesentium.
+          </p>
         </div>
+        <Button>Ajouter un magasin</Button>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <Table className="mt-8">
+        <TableHead>
+          <TableRow>
+            <TableHeadCell className="pr-4 w-fit">
+              <div className="flex items-center">
+                <Checkbox />
+              </div>
+            </TableHeadCell>
+            <TableHeadCell>Manager</TableHeadCell>
+            <TableHeadCell>Capacité</TableHeadCell>
+            <TableHeadCell>Créé le</TableHeadCell>
+            <TableHeadCell>Modifié le</TableHeadCell>
+            <TableHeadCell> </TableHeadCell>
+          </TableRow>
+        </TableHead>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+        <TableBody>
+          {mockData.map((store) => (
+            <TableBodyRow key={store.id}>
+              <TableCell className="pr-4">
+                <Checkbox />
+              </TableCell>
+              <TableCell>{store.manager}</TableCell>
+              <TableCell>{store.capacity}</TableCell>
+              <TableCell>{store.createdAt}</TableCell>
+              <TableCell>{store.updatedAt}</TableCell>
+              <TableCell>
+                <Button size="sm">Modifier</Button>
+              </TableCell>
+            </TableBodyRow>
+          ))}
+        </TableBody>
+      </Table>
     </main>
   );
 }
