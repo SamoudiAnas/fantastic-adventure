@@ -1,8 +1,8 @@
 import { Checkbox } from "@/components/ui/table";
-import { Piece } from "@/types";
+import { Store } from "@/types";
 import { createColumnHelper } from "@tanstack/react-table";
 
-const columnHelper = createColumnHelper<Piece>();
+const columnHelper = createColumnHelper<Store>();
 
 const columns = [
   columnHelper.accessor("id", {
@@ -28,37 +28,33 @@ const columns = [
     enableResizing: false,
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor("partDesignation", {
-    header: "Designation",
+  columnHelper.accessor("manager", {
+    header: "Manager",
     cell: (info) => info.getValue(),
     footer: (info) => info.column.id,
   }),
 
-  columnHelper.accessor("pieceType", {
-    header: "Type",
+  columnHelper.accessor("capacity", {
+    header: "Capacity",
     cell: (info) => info.getValue(),
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor("pieceUnit", {
-    header: "Unit",
+  columnHelper.accessor("exitVoucherIds", {
+    header: "Exit Vouchers",
     cell: (info) => info.getValue(),
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor("price", {
-    header: "Price",
+  columnHelper.accessor("accessoireIds", {
+    header: "Accessoires",
     cell: (info) => info.getValue(),
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor("quantity", {
-    header: "Quantity",
+  columnHelper.accessor("piecesIds", {
+    header: "Pieces",
     cell: (info) => info.getValue(),
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor("receptionDate", {
-    header: "Reception Date",
-    cell: (info) => info.getValue(),
-    footer: (info) => info.column.id,
-  }),
+
   columnHelper.accessor("createdAt", {
     header: "Created at",
     cell: (info) => new Date(info.getValue()).toLocaleString(),
@@ -71,4 +67,4 @@ const columns = [
   }),
 ];
 
-export { columns as piecesColumns };
+export { columns as storesColumns };
