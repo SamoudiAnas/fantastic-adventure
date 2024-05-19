@@ -1,6 +1,6 @@
 import TriangleIcon from "@root/public/svgs/triangle.svg";
 import * as Table from "@/components/ui/table";
-import { Piece } from "@/types";
+import { Store } from "@/types";
 
 import {
   SortingState,
@@ -9,21 +9,21 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { piecesColumns } from "./pieces-columns";
+import { storesColumns } from "./stores-columns";
 import { Panel } from "@/components/ui/panel";
 import { useState } from "react";
 import { cn } from "@/utils/cn";
 
-interface PiecesTableProps {
-  pieces: Piece[];
+interface storesTableProps {
+  stores: Store[];
 }
 
-export const PiecesTable = ({ pieces }: PiecesTableProps) => {
+export const StoresTable = ({ stores }: storesTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const table = useReactTable({
-    data: pieces,
-    columns: piecesColumns,
+    data: stores,
+    columns: storesColumns,
     enableColumnResizing: true,
     columnResizeMode: "onChange",
     columnResizeDirection: "ltr",
@@ -132,7 +132,7 @@ export const PiecesTable = ({ pieces }: PiecesTableProps) => {
       </Table.Root>
 
       <Panel
-        dataId="pieces"
+        dataId="stores"
         selectedData={table
           .getSelectedRowModel()
           .rows.map((row) => row.original.id)}
