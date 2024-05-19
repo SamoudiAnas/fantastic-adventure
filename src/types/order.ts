@@ -1,10 +1,16 @@
-export type Order = {
-  id: number;
-  quantity: number;
-  storeId: number;
-  piecesIds: number[];
-  accessoryId: number[];
-  supplierId: number;
-  createdAt: string;
-  updatedAt: string;
-};
+import { z } from "zod";
+
+const orderSchema = z.object({
+  id: z.number(),
+  quantity: z.number(),
+  storeId: z.number(),
+  piecesIds: z.array(z.number()),
+  accessoryId: z.array(z.number()),
+  supplierId: z.number(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
+
+type Order = z.infer<typeof orderSchema>;
+
+export { orderSchema, type Order };

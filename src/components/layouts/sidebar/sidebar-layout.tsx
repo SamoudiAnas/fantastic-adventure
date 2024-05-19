@@ -14,26 +14,27 @@ interface SidebarLayoutProps {
 export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
   const { isOpen, set: setSidebar } = useSidebarStore();
 
-  useEffect(() => {
-    // Close sidebar on small screens
-    const handleWindowResize = () => {
-      if (window.innerWidth < SCREEN_SIZE_MD) {
-        setSidebar(false);
-      }
-    };
+  // useEffect(() => {
+  //   // Close sidebar on small screens
+  //   const handleWindowResize = () => {
+  //     if (window.innerWidth < SCREEN_SIZE_MD) {
+  //       setSidebar(false);
+  //     }
+  //   };
 
-    window.addEventListener("resize", handleWindowResize);
+  //   window.addEventListener("resize", handleWindowResize);
 
-    return () => window.removeEventListener("resize", handleWindowResize);
-  }, []);
+  //   return () => window.removeEventListener("resize", handleWindowResize);
+  // }, []);
 
   return (
     <BasicLayout>
       <div className="flex">
         <aside
           className={cn(
-            "bg-gray-50 min-h-screen h-screen flex flex-col justify-between py-4 transition-all border-r border-r-gray-300",
-            isOpen ? "w-80 px-4" : "w-14 px-1"
+            "min-h-screen shrink-0 bg-gray-50 py-4",
+            "flex flex-col justify-between border-r border-r-gray-300 transition-all ",
+            isOpen ? "w-80 px-4" : "w-14 px-1",
           )}
         >
           {/*============= NAV ELEMENTS ================ */}
@@ -49,7 +50,7 @@ export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
           </div>
         </aside>
 
-        <div className="flex-grow">{children}</div>
+        <div className="block w-full flex-grow overflow-hidden">{children}</div>
       </div>
     </BasicLayout>
   );
