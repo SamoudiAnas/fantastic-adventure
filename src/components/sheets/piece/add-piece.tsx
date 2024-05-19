@@ -11,15 +11,16 @@ import {
 import { useToast } from "@/hooks/use-toast";
 
 import { firestore } from "@/lib/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 import { collections } from "@/constants/collections";
 import { generateId, idType } from "@/helpers/generateId";
 
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Piece, pieceSchema } from "@/types";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 export const AddPiece = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -47,30 +48,29 @@ export const AddPiece = () => {
     },
   });
 
-  const addPiece = async (data: Piece) => {
+  const onSubmit: SubmitHandler<Piece> = async (data) => {
     try {
       setIsLoading(true);
-      await setDoc(doc(firestore, collections.pieces, data.id), data);
+      const ref = doc(collection(firestore, collections.pieces));
+      await setDoc(ref, data);
       refreshData();
       reset();
       toast({
         title: "Success",
-        description: "Le magasin a été ajouté avec succès",
+        description: "Piece added successfully",
         variant: "success",
       });
     } catch (error) {
       console.error(error);
       toast({
         title: "Erreur",
-        description: "Une erreur s'est produite lors de l'ajout du magasin",
+        description: "An error occurred",
         variant: "destructive",
       });
     } finally {
       setIsLoading(false);
     }
   };
-
-  const onSubmit = handleSubmit(addPiece);
 
   return (
     <Sheet>
@@ -82,7 +82,7 @@ export const AddPiece = () => {
           <SheetTitle> Add Piece</SheetTitle>
           <SheetDescription>Add a new piece to the store</SheetDescription>
 
-          <form onSubmit={onSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <fieldset className="mt-4">
               <label htmlFor="partDesignation">Part Designation</label>
               <Input
@@ -96,7 +96,6 @@ export const AddPiece = () => {
                 </p>
               )}
             </fieldset>
-
             <fieldset className="mt-4">
               <label htmlFor="pieceType">Piece Type</label>
               <Input
@@ -163,7 +162,14 @@ export const AddPiece = () => {
               )}
             </fieldset>
             <Button disabled={isLoading} type="submit" className="mt-4">
-              {isLoading ? "Loading..." : "Add Piece"}
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 size-4 animate-spin" />
+                  <span>Loading...</span>
+                </>
+              ) : (
+                <>Add Piece</>
+              )}
             </Button>
           </form>
         </SheetHeader>

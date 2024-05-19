@@ -34,7 +34,7 @@ export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
           className={cn(
             "min-h-screen shrink-0 bg-gray-50 py-4",
             "flex flex-col justify-between border-r border-r-gray-300 transition-all ",
-            isOpen ? "w-80 px-4" : "w-14 px-1",
+            isOpen ? "w-64 px-4" : "w-14 px-1",
           )}
         >
           {/*============= NAV ELEMENTS ================ */}

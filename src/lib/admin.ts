@@ -8,10 +8,10 @@ if (!adminApp) {
   adminApp = initializeApp(
     {
       credential: cert(
-        JSON.parse(process.env.PRIVATE_FIREBASE_SERVICE_ACCOUNT ?? "") as any
+        JSON.parse(process.env.PRIVATE_FIREBASE_SERVICE_ACCOUNT ?? "") as any,
       ),
     },
-    "admin-app"
+    "admin-app",
   );
 }
 
