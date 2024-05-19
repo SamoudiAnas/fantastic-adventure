@@ -1,14 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Table,
-  TableBody,
-  TableBodyRow,
-  TableCell,
-  TableHead,
-  TableHeadCell,
-  TableRow,
-} from "@/components/ui/table";
+import * as Table from "@/components/ui/table";
 import { Store } from "@/types";
 
 const mockData: Store[] = [
@@ -117,10 +109,10 @@ const mockData: Store[] = [
 export default function Home() {
   return (
     <main className="p-8">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div className="">
-          <h1 className="text-lg font-bold mb-2">Magasin</h1>
-          <p className="text-sm text-gray-500 max-w-[55ch]">
+          <h1 className="mb-2 text-lg font-bold">Magasin</h1>
+          <p className="max-w-[55ch] text-sm text-gray-500">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit,
             quae vero. Voluptas adipisci praesentium.
           </p>
@@ -128,39 +120,37 @@ export default function Home() {
         <Button>Ajouter un magasin</Button>
       </div>
 
-      <Table className="mt-8">
-        <TableHead>
-          <TableRow>
-            <TableHeadCell className="pr-4 w-fit">
-              <div className="flex items-center">
-                <Checkbox />
-              </div>
-            </TableHeadCell>
-            <TableHeadCell>Manager</TableHeadCell>
-            <TableHeadCell>Capacité</TableHeadCell>
-            <TableHeadCell>Créé le</TableHeadCell>
-            <TableHeadCell>Modifié le</TableHeadCell>
-            <TableHeadCell> </TableHeadCell>
-          </TableRow>
-        </TableHead>
+      <Table.Root className="mt-8">
+        <Table.Head>
+          <Table.Row>
+            <Table.HeadCell className="w-fit pr-4">
+              <Table.Checkbox checked={false} />
+            </Table.HeadCell>
+            <Table.HeadCell>Manager</Table.HeadCell>
+            <Table.HeadCell>Capacité</Table.HeadCell>
+            <Table.HeadCell>Créé le</Table.HeadCell>
+            <Table.HeadCell>Modifié le</Table.HeadCell>
+            <Table.HeadCell> </Table.HeadCell>
+          </Table.Row>
+        </Table.Head>
 
-        <TableBody>
+        <Table.Body>
           {mockData.map((store) => (
-            <TableBodyRow key={store.id}>
-              <TableCell className="pr-4">
-                <Checkbox />
-              </TableCell>
-              <TableCell>{store.manager}</TableCell>
-              <TableCell>{store.capacity}</TableCell>
-              <TableCell>{store.createdAt}</TableCell>
-              <TableCell>{store.updatedAt}</TableCell>
-              <TableCell>
+            <Table.BodyRow key={store.id}>
+              <Table.Cell className="pr-4">
+                <Table.Checkbox checked={false} />
+              </Table.Cell>
+              <Table.Cell>{store.manager}</Table.Cell>
+              <Table.Cell>{store.capacity}</Table.Cell>
+              <Table.Cell>{store.createdAt}</Table.Cell>
+              <Table.Cell>{store.updatedAt}</Table.Cell>
+              <Table.Cell>
                 <Button size="sm">Modifier</Button>
-              </TableCell>
-            </TableBodyRow>
+              </Table.Cell>
+            </Table.BodyRow>
           ))}
-        </TableBody>
-      </Table>
+        </Table.Body>
+      </Table.Root>
     </main>
   );
 }

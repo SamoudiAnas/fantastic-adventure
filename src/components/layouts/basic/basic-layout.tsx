@@ -8,7 +8,7 @@ interface BasicLayoutProps {
 
 export const BasicLayout = ({ children, className = "" }: BasicLayoutProps) => {
   return (
-    <main className={cn(className)}>
+    <main className={cn("overflow-x-clip", className)}>
       <Header />
       {children}
     </main>

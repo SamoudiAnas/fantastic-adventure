@@ -10,27 +10,27 @@ import {
 
 export const appRoutes = {
   home: "/",
-  stores: "/stores",
+  stores: "/magasins",
   store: (id: string | number) => `/stores/${id}`,
   pieces: "/pieces",
   piece: (id: string | number) => `/pieces/${id}`,
   organs: "/organs",
   organ: (id: string | number) => `/organs/${id}`,
-  orders: "/orders",
-  order: (id: string | number) => `/orders/${id}`,
+  orders: "/commandes",
+  order: (id: string | number) => `/commandes/${id}`,
   interventions: "/interventions",
   intervention: (id: string | number) => `/interventions/${id}`,
-  exitVouchers: "/exit-vouchers",
-  exitVoucher: (id: string | number) => `/exit-vouchers/${id}`,
-  accessories: "/accessories",
-  accessory: (id: string | number) => `/accessories/${id}`,
-  rtgMachines: "/rtg-machines",
-  rtgMachine: (id: string | number) => `/rtg-machines/${id}`,
+  exitVouchers: "/bon-de-sortie",
+  exitVoucher: (id: string | number) => `/bon-de-sortie/${id}`,
+  accessories: "/accessoires",
+  accessory: (id: string | number) => `/accessoires/${id}`,
+  rtgMachines: "/machines-rtg",
+  rtgMachine: (id: string | number) => `/machines-rtg/${id}`,
 };
 
 export const appLinks = [
   {
-    name: "Stores",
+    name: "Magasins",
     path: appRoutes.stores,
     icon: <ShoppingBag className="size-5" />,
   },
@@ -60,12 +60,12 @@ export const appLinks = [
     icon: <ReceiptText className="size-5" />,
   },
   {
-    name: "Accessories",
+    name: "Accessoires",
     path: appRoutes.accessories,
     icon: <Hammer className="size-5" />,
   },
   {
-    name: "RTG Machines",
+    name: "Machine RTG",
     path: appRoutes.rtgMachines,
     icon: <WashingMachine className="size-5" />,
   },

@@ -6,7 +6,7 @@ import { cn } from "@/utils/cn";
 
 const buttonVariants = cva(
   `
-  inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium 
+  inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm shadow-md font-medium 
   ring-offset-2 transition-colors 
   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 
   disabled:pointer-events-none disabled:opacity-50
@@ -16,8 +16,13 @@ const buttonVariants = cva(
       variant: {
         default: "bg-indigo-600 text-white hover:bg-indigo-600/90",
         destructive: "bg-red-600 text-white hover:bg-red-600/90",
+        ghost: "bg-transparent text-gray-500 hover:bg-gray-100",
+        "dashed-ghost":
+          "bg-gray-50 border border-dashed border-gray-400 text-gray-500 hover:bg-gray-100",
+        "outlined-ghost":
+          "border border-gray-300 text-gray-500 shadow-none hover:bg-gray-100",
         outline:
-          "border border-indigo-600 bg-transparent hover:bg-indigo-600 hover:text-white",
+          "border border-indigo-600 bg-transparent  hover:bg-indigo-600 hover:text-white",
         link: "text-blue-500 underline-offset-4 hover:underline",
       },
       size: {
@@ -31,7 +36,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -50,7 +55,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       />
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

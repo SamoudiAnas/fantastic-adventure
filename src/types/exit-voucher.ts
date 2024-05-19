@@ -1,9 +1,13 @@
-export type ExitVoucher = {
-  id: number;
-  dateIssue: string;
-  usageDescription: string;
-  registrationNumberInterv: number;
-  idInterv: number;
-  createdAt: string;
-  updatedAt: string;
-};
+import { z } from "zod";
+
+const exitVoucherSchema = z.object({
+  id: z.number(),
+  dateIssue: z.string(),
+  usageDescription: z.string(),
+  registrationNumberInterv: z.number(),
+  idInterv: z.number(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
+
+export type ExitVoucher = z.infer<typeof exitVoucherSchema>;
