@@ -1,5 +1,5 @@
 export * from "./store";
-export * from "./piece";
+export * from "./part";
 export * from "./organ";
 export * from "./order";
 export * from "./intervention";

@@ -1,8 +1,8 @@
 import { Checkbox } from "@/components/ui/table";
-import { Piece } from "@/types";
+import { Part } from "@/types";
 import { createColumnHelper } from "@tanstack/react-table";
 
-const columnHelper = createColumnHelper<Piece>();
+const columnHelper = createColumnHelper<Part>();
 
 const columns = [
   columnHelper.accessor("id", {
@@ -34,12 +34,12 @@ const columns = [
     footer: (info) => info.column.id,
   }),
 
-  columnHelper.accessor("pieceType", {
+  columnHelper.accessor("partType", {
     header: "Type",
     cell: (info) => info.getValue(),
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor("pieceUnit", {
+  columnHelper.accessor("partUnit", {
     header: "Unit",
     cell: (info) => info.getValue(),
     footer: (info) => info.column.id,
@@ -71,4 +71,4 @@ const columns = [
   }),
 ];
 
-export { columns as piecesColumns };
+export { columns as partsColumns };

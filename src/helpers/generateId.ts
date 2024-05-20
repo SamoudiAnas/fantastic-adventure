@@ -1,6 +1,6 @@
 export enum idType {
   store = "STORE",
-  piece = "PIECE",
+  part = "Part",
   organ = "ORGAN",
   order = "ORDER",
   intervention = "INTERVENTION",

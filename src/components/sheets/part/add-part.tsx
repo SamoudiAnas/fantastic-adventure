@@ -17,12 +17,12 @@ import { generateId, idType } from "@/helpers/generateId";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Piece, pieceSchema } from "@/types";
+import { Part, partSchema } from "@/types";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 import { Loader2 } from "lucide-react";
 
-export const AddPiece = () => {
+export const AddPart = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { toast } = useToast();
@@ -32,15 +32,15 @@ export const AddPiece = () => {
     router.replace(router.asPath);
   };
 
-  const id = useMemo(() => generateId(idType.piece), []);
+  const id = useMemo(() => generateId(idType.part), []);
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Piece>({
-    resolver: zodResolver(pieceSchema),
+  } = useForm<Part>({
+    resolver: zodResolver(partSchema),
     defaultValues: {
       id: id,
       createdAt: new Date().toISOString(),
@@ -48,16 +48,16 @@ export const AddPiece = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<Piece> = async (data) => {
+  const onSubmit: SubmitHandler<Part> = async (data) => {
     try {
       setIsLoading(true);
-      const ref = doc(collection(firestore, collections.pieces));
+      const ref = doc(collection(firestore, collections.parts));
       await setDoc(ref, data);
       refreshData();
       reset();
       toast({
         title: "Success",
-        description: "Piece added successfully",
+        description: "Part added successfully",
         variant: "success",
       });
     } catch (error) {
@@ -75,12 +75,12 @@ export const AddPiece = () => {
   return (
     <Sheet>
       <SheetTrigger className={buttonVariants({ variant: "default" })}>
-        Add Piece
+        Add Part
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle> Add Piece</SheetTitle>
-          <SheetDescription>Add a new piece to the store</SheetDescription>
+          <SheetTitle> Add Part</SheetTitle>
+          <SheetDescription>Add a new part to the store</SheetDescription>
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <fieldset className="mt-4">
@@ -97,28 +97,28 @@ export const AddPiece = () => {
               )}
             </fieldset>
             <fieldset className="mt-4">
-              <label htmlFor="pieceType">Piece Type</label>
+              <label htmlFor="partType">Part Type</label>
               <Input
-                placeholder="Piece Type"
+                placeholder="Part Type"
                 className="mt-2"
-                {...register("pieceType")}
+                {...register("partType")}
               />
-              {errors.pieceType && (
+              {errors.partType && (
                 <p className="mt-2 text-sm text-red-600">
-                  {errors.pieceType.message}
+                  {errors.partType.message}
                 </p>
               )}
             </fieldset>
             <fieldset className="mt-4">
-              <label htmlFor="pieceUnit">Piece Unit</label>
+              <label htmlFor="partUnit">Part Unit</label>
               <Input
-                placeholder="Piece Unit"
+                placeholder="Part Unit"
                 className="mt-2"
-                {...register("pieceUnit")}
+                {...register("partUnit")}
               />
-              {errors.pieceUnit && (
+              {errors.partUnit && (
                 <p className="mt-2 text-sm text-red-600">
-                  {errors.pieceUnit.message}
+                  {errors.partUnit.message}
                 </p>
               )}
             </fieldset>
@@ -168,7 +168,7 @@ export const AddPiece = () => {
                   <span>Loading...</span>
                 </>
               ) : (
-                <>Add Piece</>
+                <>Add Part</>
               )}
             </Button>
           </form>

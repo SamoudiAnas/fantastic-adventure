@@ -1,1 +1,1 @@
-export * from "./piece-table-menu";
+export * from "./parts-table-menu";

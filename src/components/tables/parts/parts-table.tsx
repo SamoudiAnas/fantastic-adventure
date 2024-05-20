@@ -1,41 +1,16 @@
 import TriangleIcon from "@root/public/svgs/triangle.svg";
 import * as Table from "@/components/ui/table";
-import { Piece } from "@/types";
+import { Part } from "@/types";
 
-import {
-  SortingState,
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { piecesColumns } from "./pieces-columns";
+import { Table as TanstackTable, flexRender } from "@tanstack/react-table";
 import { Panel } from "@/components/ui/panel";
-import { useState } from "react";
 import { cn } from "@/utils/cn";
 
-interface PiecesTableProps {
-  pieces: Piece[];
+interface PartsTableProps {
+  table: TanstackTable<Part>;
 }
 
-export const PiecesTable = ({ pieces }: PiecesTableProps) => {
-  const [sorting, setSorting] = useState<SortingState>([]);
-
-  const table = useReactTable({
-    data: pieces,
-    columns: piecesColumns,
-    enableColumnResizing: true,
-    columnResizeMode: "onChange",
-    columnResizeDirection: "ltr",
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    onSortingChange: setSorting,
-    state: {
-      sorting,
-    },
-  });
-
-  table.getSelectedRowModel();
+export const PartsTable = ({ table }: PartsTableProps) => {
   return (
     <>
       <Table.Root
@@ -132,7 +107,7 @@ export const PiecesTable = ({ pieces }: PiecesTableProps) => {
       </Table.Root>
 
       <Panel
-        dataId="pieces"
+        dataId="parts"
         selectedData={table
           .getSelectedRowModel()
           .rows.map((row) => row.original.id)}

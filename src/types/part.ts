@@ -1,10 +1,10 @@
 import { z } from "zod";
 
-const pieceSchema = z.object({
+const partSchema = z.object({
   id: z.string(),
   partDesignation: z.string(),
-  pieceUnit: z.string(),
-  pieceType: z.string(),
+  partUnit: z.string(),
+  partType: z.string(),
   price: z.number(),
   quantity: z.number(),
   receptionDate: z.string(),
@@ -12,6 +12,6 @@ const pieceSchema = z.object({
   updatedAt: z.string(),
 });
 
-type Piece = z.infer<typeof pieceSchema>;
+type Part = z.infer<typeof partSchema>;
 
-export { pieceSchema, type Piece };
+export { partSchema, type Part };

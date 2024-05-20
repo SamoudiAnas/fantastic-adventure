@@ -8,11 +8,11 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { Edit, Ellipsis, PanelLeftOpen, Trash } from "lucide-react";
 
-interface PieceTableMenuProps {
+interface PartTableMenuProps {
   id: string;
 }
 
-export const PieceTableMenu = ({ id }: PieceTableMenuProps) => {
+export const PartTableMenu = ({ id }: PartTableMenuProps) => {
   return (
     <Popover>
       <PopoverTrigger

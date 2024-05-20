@@ -12,8 +12,8 @@ export const appRoutes = {
   home: "/",
   stores: "/magasins",
   store: (id: string | number) => `/stores/${id}`,
-  pieces: "/pieces",
-  piece: (id: string | number) => `/pieces/${id}`,
+  parts: "/parts",
+  part: (id: string | number) => `/parts/${id}`,
   organs: "/organs",
   organ: (id: string | number) => `/organs/${id}`,
   orders: "/commandes",
@@ -35,8 +35,8 @@ export const appLinks = [
     icon: <ShoppingBag className="size-5" />,
   },
   {
-    name: "Pieces",
-    path: appRoutes.pieces,
+    name: "Parts",
+    path: appRoutes.parts,
     icon: <Puzzle className="size-5" />,
   },
   {
