@@ -1,3 +1,4 @@
+import { PartTableMenu } from "@/components/popovers";
 import { Checkbox } from "@/components/ui/table";
 import { Part } from "@/types";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -26,6 +27,8 @@ const columns = [
     ),
     enableSorting: false,
     enableResizing: false,
+    enableColumnFilter: false,
+
     footer: (info) => info.column.id,
   }),
   columnHelper.accessor("partDesignation", {
@@ -41,11 +44,6 @@ const columns = [
   }),
   columnHelper.accessor("partUnit", {
     header: "Unit",
-    cell: (info) => info.getValue(),
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("price", {
-    header: "Price",
     cell: (info) => info.getValue(),
     footer: (info) => info.column.id,
   }),
@@ -68,6 +66,15 @@ const columns = [
     header: "Updated at",
     cell: (info) => new Date(info.getValue()).toLocaleString(),
     footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("id", {
+    id: "actions",
+    header: "",
+    cell: (info) => <PartTableMenu id={info.getValue()} />,
+    footer: (info) => info.column.id,
+    enableSorting: false,
+    enableResizing: false,
+    enableColumnFilter: false,
   }),
 ];
 

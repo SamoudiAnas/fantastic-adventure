@@ -20,10 +20,26 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Part, partSchema } from "@/types";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
-import { Loader2 } from "lucide-react";
+import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { organs } from "@/constants/organs";
+import { Command } from "cmdk";
+import {
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "@/components/ui/combobox";
+import { cn } from "@/utils/cn";
 
 export const AddPart = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
 
   const { toast } = useToast();
   const router = useRouter();
@@ -110,31 +126,62 @@ export const AddPart = () => {
               )}
             </fieldset>
             <fieldset className="mt-4">
-              <label htmlFor="partUnit">Part Unit</label>
-              <Input
-                placeholder="Part Unit"
-                className="mt-2"
-                {...register("partUnit")}
-              />
+              <label htmlFor="partUnit" className="mb-2 block">
+                Part Unit
+              </label>
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger
+                  className={buttonVariants({
+                    variant: "outlined-ghost",
+                    className: "w-full justify-between",
+                  })}
+                >
+                  {value
+                    ? organs.find((organ) => organ.value === value)?.label
+                    : "Select organ..."}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </PopoverTrigger>
+                <PopoverContent align="start" className="w-full p-0">
+                  <Command>
+                    <CommandInput placeholder="Search organ..." />
+                    <CommandEmpty>No organ found.</CommandEmpty>
+                    <CommandGroup>
+                      {organs?.map((organ) => (
+                        <CommandItem
+                          key={organ.value}
+                          value={organ.value}
+                          onSelect={(currentValue) => {
+                            setValue(
+                              currentValue === value ? "" : currentValue,
+                            );
+                            setOpen(false);
+                          }}
+                          className={
+                            value === organ.value ? "bg-indigo-100" : ""
+                          }
+                        >
+                          <Check
+                            className={cn(
+                              "mr-2 h-4 w-4",
+                              value === organ.value
+                                ? "opacity-100"
+                                : "opacity-0",
+                            )}
+                          />
+                          {organ.label}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </Command>
+                </PopoverContent>
+              </Popover>
               {errors.partUnit && (
                 <p className="mt-2 text-sm text-red-600">
                   {errors.partUnit.message}
                 </p>
               )}
             </fieldset>
-            <fieldset className="mt-4">
-              <label htmlFor="price">Price</label>
-              <Input
-                placeholder="Price"
-                className="mt-2"
-                {...register("price", { valueAsNumber: true })}
-              />
-              {errors.price && (
-                <p className="mt-2 text-sm text-red-600">
-                  {errors.price.message}
-                </p>
-              )}
-            </fieldset>
+
             <fieldset className="mt-4">
               <label htmlFor="quantity">Quantity</label>
               <Input

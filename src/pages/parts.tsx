@@ -23,6 +23,7 @@ import { useState } from "react";
 
 import { partsColumns } from "@/components/tables/parts/parts-columns";
 import { fuzzyFilter } from "@/helpers/fuzzyFilter";
+import { TableFilter } from "@/components/tables/table-filters";
 
 export const getServerSideProps = async () => {
   const { parts, error } = await getAllParts();
@@ -85,17 +86,21 @@ export default function Home({ parts, error }: PartProps) {
             <p className="text-gray-500">
               {table.getPrePaginationRowModel().rows.length} parts
             </p>
+
+            <TableFilter table={table} />
           </div>
 
           <div className="flex items-center gap-4">
-            <CSVLink
-              data={parts}
-              enclosingCharacter={`'`}
-              filename={`parts-${new Date().toISOString()}.csv`}
-              className={buttonVariants({ variant: "outlined-ghost" })}
-            >
-              Export
-            </CSVLink>
+            {parts?.length > 0 && (
+              <CSVLink
+                data={parts}
+                enclosingCharacter={`'`}
+                filename={`parts-${new Date().toISOString()}.csv`}
+                className={buttonVariants({ variant: "outlined-ghost" })}
+              >
+                Export
+              </CSVLink>
+            )}
             <AddPart />
           </div>
         </div>

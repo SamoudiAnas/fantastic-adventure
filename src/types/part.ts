@@ -5,7 +5,6 @@ const partSchema = z.object({
   partDesignation: z.string(),
   partUnit: z.string(),
   partType: z.string(),
-  price: z.number(),
   quantity: z.number(),
   receptionDate: z.string(),
   createdAt: z.string(),
