@@ -5,6 +5,7 @@ export const interventionSchema = z.object({
   date: z.string(),
   duration: z.string(),
   registrationNumber: z.number(),
+  type: z.string(),
   machineId: z.string(),
   organId: z.string(),
   createdAt: z.string(),

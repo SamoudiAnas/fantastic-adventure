@@ -30,6 +30,11 @@ const columns = [
 
     footer: (info) => info.column.id,
   }),
+  columnHelper.accessor("type", {
+    header: "Type",
+    cell: (info) => info.getValue(),
+    footer: (info) => info.column.id,
+  }),
   columnHelper.accessor("date", {
     header: "Date",
     cell: (info) => info.getValue(),
