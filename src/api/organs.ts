@@ -1,23 +1,23 @@
 import { collections } from "@/constants/collections";
 import { db } from "@/lib/admin";
-import { Piece } from "@/types";
+import { Organ } from "@/types";
 
-export const getAllPieces = async () => {
+export const getAllOrgans = async () => {
   try {
-    const piecesRef = await db.collection(collections.pieces).get();
-    const pieces = piecesRef.docs.map((doc) => ({
+    const organsRef = await db.collection(collections.organs).get();
+    const organs = organsRef.docs.map((doc) => ({
       ...doc.data(),
     }));
 
     return {
       error: null,
-      pieces: pieces as Piece[],
+      organs: organs as Organ[],
     };
   } catch (err) {
     console.log(err);
     return {
       error: "Something went wrong",
-      pieces: [] as Piece[],
+      organs: [] as Organ[],
     };
   }
 };

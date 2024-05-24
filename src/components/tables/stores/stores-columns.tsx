@@ -49,8 +49,8 @@ const columns = [
     cell: (info) => info.getValue(),
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor("piecesIds", {
-    header: "Pieces",
+  columnHelper.accessor("partsIds", {
+    header: "Parts",
     cell: (info) => info.getValue(),
     footer: (info) => info.column.id,
   }),

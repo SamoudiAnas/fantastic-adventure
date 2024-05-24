@@ -38,10 +38,10 @@ export const AddStore = () => {
   } = useForm<Store>({
     resolver: zodResolver(storeSchema),
     values: {
-      id: "ss",
+      id: id,
       manager: "",
       capacity: 0,
-      piecesIds: 0,
+      partsIds: 0,
       exitVoucherIds: 0,
       accessoireIds: 0,
       createdAt: new Date().toISOString(),
@@ -123,11 +123,11 @@ export const AddStore = () => {
               )}
             </fieldset>
             <fieldset className="mt-4">
-              <label htmlFor="piecesIds">Pièces</label>
+              <label htmlFor="partsIds">Pièces</label>
               <Input
                 placeholder="Pièces"
                 className="mt-2"
-                {...register("piecesIds", { valueAsNumber: true })}
+                {...register("partsIds", { valueAsNumber: true })}
               />
               {errors.exitVoucherIds && (
                 <p className="mt-2 text-sm text-red-600">

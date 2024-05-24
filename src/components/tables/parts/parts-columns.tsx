@@ -1,8 +1,9 @@
+import { PartTableMenu } from "@/components/popovers";
 import { Checkbox } from "@/components/ui/table";
-import { Piece } from "@/types";
+import { Part } from "@/types";
 import { createColumnHelper } from "@tanstack/react-table";
 
-const columnHelper = createColumnHelper<Piece>();
+const columnHelper = createColumnHelper<Part>();
 
 const columns = [
   columnHelper.accessor("id", {
@@ -26,6 +27,8 @@ const columns = [
     ),
     enableSorting: false,
     enableResizing: false,
+    enableColumnFilter: false,
+
     footer: (info) => info.column.id,
   }),
   columnHelper.accessor("partDesignation", {
@@ -34,18 +37,13 @@ const columns = [
     footer: (info) => info.column.id,
   }),
 
-  columnHelper.accessor("pieceType", {
+  columnHelper.accessor("partType", {
     header: "Type",
     cell: (info) => info.getValue(),
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor("pieceUnit", {
+  columnHelper.accessor("partUnit", {
     header: "Unit",
-    cell: (info) => info.getValue(),
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("price", {
-    header: "Price",
     cell: (info) => info.getValue(),
     footer: (info) => info.column.id,
   }),
@@ -69,6 +67,15 @@ const columns = [
     cell: (info) => new Date(info.getValue()).toLocaleString(),
     footer: (info) => info.column.id,
   }),
+  columnHelper.accessor("id", {
+    id: "actions",
+    header: "",
+    cell: (info) => <PartTableMenu id={info.getValue()} />,
+    footer: (info) => info.column.id,
+    enableSorting: false,
+    enableResizing: false,
+    enableColumnFilter: false,
+  }),
 ];
 
-export { columns as piecesColumns };
+export { columns as partsColumns };

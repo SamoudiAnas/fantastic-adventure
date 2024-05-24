@@ -38,7 +38,7 @@ export default function Home({ stores, error }: HomeProps) {
           <div className="flex items-center gap-4">
             <SearchInput
               className="max-w-96 "
-              placeholder="Search for a piece..."
+              placeholder="Search for a part..."
             />
             <Button variant="dashed-ghost">Filter</Button>
           </div>
@@ -47,7 +47,7 @@ export default function Home({ stores, error }: HomeProps) {
             <CSVLink
               data={stores}
               enclosingCharacter={`'`}
-              filename={`pieces-${new Date().toISOString()}.csv`}
+              filename={`stores-${new Date().toISOString()}.csv`}
               className={buttonVariants({ variant: "outlined-ghost" })}
             >
               Export

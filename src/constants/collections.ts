@@ -1,6 +1,6 @@
 export const collections = {
   stores: "stores",
-  pieces: "pieces",
+  parts: "parts",
   organs: "organs",
   orders: "orders",
   interventions: "interventions",

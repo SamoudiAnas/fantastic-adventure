@@ -4,7 +4,7 @@ const orderSchema = z.object({
   id: z.number(),
   quantity: z.number(),
   storeId: z.number(),
-  piecesIds: z.array(z.number()),
+  partsIds: z.array(z.number()),
   accessoryId: z.array(z.number()),
   supplierId: z.number(),
   createdAt: z.string(),

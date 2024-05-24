@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const RTGMachineSchema = z.object({
-  id: z.number(),
+  id: z.string(),
   designation: z.string(),
   serviceStartDate: z.string(),
   supplier: z.string(),

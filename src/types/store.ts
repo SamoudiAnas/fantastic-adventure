@@ -10,7 +10,7 @@ const storeSchema = z.object({
   capacity: z.number({
     required_error: "La capacité est requise",
   }),
-  piecesIds: z.number({
+  partsIds: z.number({
     required_error: "Les pièces sont requises",
   }),
   exitVoucherIds: z.number({

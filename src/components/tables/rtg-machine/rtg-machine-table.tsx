@@ -1,41 +1,26 @@
 import TriangleIcon from "@root/public/svgs/triangle.svg";
 import * as Table from "@/components/ui/table";
-import { Piece } from "@/types";
+import { RTGMachine } from "@/types";
 
-import {
-  SortingState,
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { piecesColumns } from "./pieces-columns";
+import { Table as TanstackTable, flexRender } from "@tanstack/react-table";
 import { Panel } from "@/components/ui/panel";
-import { useState } from "react";
 import { cn } from "@/utils/cn";
+import { deleteRTGMachines } from "@/api/rtg-machines.client";
+import { queryKeys } from "@/constants/queryKeys";
+import { queryClient } from "@/pages/_app";
+import { useRouter } from "next/router";
 
-interface PiecesTableProps {
-  pieces: Piece[];
+interface RTGMachinesTableProps {
+  table: TanstackTable<RTGMachine>;
 }
 
-export const PiecesTable = ({ pieces }: PiecesTableProps) => {
-  const [sorting, setSorting] = useState<SortingState>([]);
+export const RTGMachinesTable = ({ table }: RTGMachinesTableProps) => {
+  const router = useRouter();
 
-  const table = useReactTable({
-    data: pieces,
-    columns: piecesColumns,
-    enableColumnResizing: true,
-    columnResizeMode: "onChange",
-    columnResizeDirection: "ltr",
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    onSortingChange: setSorting,
-    state: {
-      sorting,
-    },
-  });
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
 
-  table.getSelectedRowModel();
   return (
     <>
       <Table.Root
@@ -95,10 +80,10 @@ export const PiecesTable = ({ pieces }: PiecesTableProps) => {
                   {header.column.getCanResize() && (
                     <div
                       className={cn(
-                        "resizer absolute right-0 top-0 h-12 w-1 bg-transparent hover:cursor-grab group-hover:bg-gray-500",
+                        "resizer absolute right-0 top-0 h-12 w-1 bg-transparent hover:cursor-col-resize group-hover:bg-gray-500",
                         table.options.columnResizeDirection,
                         header.column.getIsResizing() &&
-                          "isResizing cursor-grabing bg-blue-500",
+                          "isResizing cursor-col-resize bg-blue-500",
                       )}
                       onDoubleClick={() => header.column.resetSize()}
                       onMouseDown={header.getResizeHandler()}
@@ -132,12 +117,19 @@ export const PiecesTable = ({ pieces }: PiecesTableProps) => {
       </Table.Root>
 
       <Panel
-        dataId="pieces"
+        dataId="RTG machines"
         selectedData={table
           .getSelectedRowModel()
           .rows.map((row) => row.original.id)}
         onClear={() => table.toggleAllPageRowsSelected(false)}
-        onDelete={() => {}}
+        onDelete={async () => {
+          await deleteRTGMachines(
+            table.getSelectedRowModel().rows.map((row) => row.original.id),
+          );
+          refreshData();
+          table.toggleAllPageRowsSelected(false);
+          queryClient.invalidateQueries(queryKeys.interventions);
+        }}
       />
     </>
   );

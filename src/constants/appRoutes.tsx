@@ -12,8 +12,8 @@ export const appRoutes = {
   home: "/",
   stores: "/magasins",
   store: (id: string | number) => `/stores/${id}`,
-  pieces: "/pieces",
-  piece: (id: string | number) => `/pieces/${id}`,
+  parts: "/parts",
+  part: (id: string | number) => `/parts/${id}`,
   organs: "/organs",
   organ: (id: string | number) => `/organs/${id}`,
   orders: "/commandes",
@@ -24,19 +24,14 @@ export const appRoutes = {
   exitVoucher: (id: string | number) => `/bon-de-sortie/${id}`,
   accessories: "/accessoires",
   accessory: (id: string | number) => `/accessoires/${id}`,
-  rtgMachines: "/machines-rtg",
-  rtgMachine: (id: string | number) => `/machines-rtg/${id}`,
+  rtgMachines: "/rtg-machines",
+  rtgMachine: (id: string | number) => `/rtg-machines/${id}`,
 };
 
 export const appLinks = [
   {
-    name: "Magasins",
-    path: appRoutes.stores,
-    icon: <ShoppingBag className="size-5" />,
-  },
-  {
-    name: "Pieces",
-    path: appRoutes.pieces,
+    name: "Parts",
+    path: appRoutes.parts,
     icon: <Puzzle className="size-5" />,
   },
   {
@@ -53,16 +48,6 @@ export const appLinks = [
     name: "Interventions",
     path: appRoutes.interventions,
     icon: <ShoppingBag className="size-5" />,
-  },
-  {
-    name: "Exit Vouchers",
-    path: appRoutes.exitVouchers,
-    icon: <ReceiptText className="size-5" />,
-  },
-  {
-    name: "Accessoires",
-    path: appRoutes.accessories,
-    icon: <Hammer className="size-5" />,
   },
   {
     name: "Machine RTG",

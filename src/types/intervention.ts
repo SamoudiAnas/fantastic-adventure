@@ -1,14 +1,12 @@
 import { z } from "zod";
 
-const interventionSchema = z.object({
-  id: z.number(),
+export const interventionSchema = z.object({
+  id: z.string(),
   date: z.string(),
   duration: z.string(),
   registrationNumber: z.number(),
-  exitVoucherId: z.number(),
-  machineId: z.number(),
-  organId: z.number(),
-  moldId: z.number(),
+  machineId: z.string(),
+  organId: z.string(),
   createdAt: z.string(),
   updatedAt: z.string(),
 });
