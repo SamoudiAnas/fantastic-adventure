@@ -64,7 +64,7 @@ export const AddIntervention = ({
     router.replace(router.asPath);
   };
 
-  const id = useMemo(() => generateId(idType.intervention), []);
+  const id = useMemo(() => generateId(idType.intervention), [open]);
 
   const {
     register,

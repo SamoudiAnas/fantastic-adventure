@@ -11,7 +11,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 
 import { firestore } from "@/lib/firebase";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { collections } from "@/constants/collections";
 import { generateId, idType } from "@/helpers/generateId";
 
@@ -20,26 +20,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Organ, organSchema } from "@/types";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
-import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { organs } from "@/constants/organs";
-import { Command } from "cmdk";
-import {
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/combobox";
-import { cn } from "@/utils/cn";
+import { Loader2 } from "lucide-react";
 
 export const AddOrgan = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
 
   const { toast } = useToast();
   const router = useRouter();
@@ -48,7 +33,7 @@ export const AddOrgan = () => {
     router.replace(router.asPath);
   };
 
-  const id = useMemo(() => generateId(idType.organ), []);
+  const id = useMemo(() => generateId(idType.organ), [open]);
 
   const {
     register,
@@ -76,6 +61,7 @@ export const AddOrgan = () => {
         description: "Organ added successfully",
         variant: "success",
       });
+      setOpen(false);
     } catch (error) {
       console.error(error);
       toast({
@@ -89,7 +75,7 @@ export const AddOrgan = () => {
   };
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger className={buttonVariants({ variant: "default" })}>
         Add Organ
       </SheetTrigger>
