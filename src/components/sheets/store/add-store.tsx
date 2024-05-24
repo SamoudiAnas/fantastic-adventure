@@ -29,7 +29,7 @@ export const AddStore = () => {
     router.replace(router.asPath);
   };
 
-  const id = useMemo(() => generateId(idType.store), []);
+  const id = useMemo(() => generateId(idType.store), [open]);
 
   const {
     register,

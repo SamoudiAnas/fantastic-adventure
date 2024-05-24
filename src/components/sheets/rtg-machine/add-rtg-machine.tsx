@@ -25,7 +25,6 @@ import { Loader2 } from "lucide-react";
 export const AddRTGMachine = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
 
   const { toast } = useToast();
   const router = useRouter();
@@ -34,7 +33,7 @@ export const AddRTGMachine = () => {
     router.replace(router.asPath);
   };
 
-  const id = useMemo(() => generateId(idType.organ), []);
+  const id = useMemo(() => generateId(idType.organ), [open]);
 
   const {
     register,
@@ -62,6 +61,7 @@ export const AddRTGMachine = () => {
         description: "RTG Machine added successfully",
         variant: "success",
       });
+      setOpen(false);
     } catch (error) {
       console.error(error);
       toast({
@@ -75,7 +75,7 @@ export const AddRTGMachine = () => {
   };
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger className={buttonVariants({ variant: "default" })}>
         Add RTG Machine
       </SheetTrigger>

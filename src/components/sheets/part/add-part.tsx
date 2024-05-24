@@ -48,7 +48,7 @@ export const AddPart = () => {
     router.replace(router.asPath);
   };
 
-  const id = useMemo(() => generateId(idType.part), []);
+  const id = useMemo(() => generateId(idType.part), [open]);
 
   const {
     register,
