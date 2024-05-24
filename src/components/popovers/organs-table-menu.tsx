@@ -7,38 +7,50 @@ import {
 } from "@/components/ui/popover";
 import { buttonVariants } from "@/components/ui/button";
 import { doc, deleteDoc } from "firebase/firestore";
-import { Edit, Ellipsis, PanelLeftOpen, Trash } from "lucide-react";
+import { Ellipsis, PanelLeftOpen, Trash } from "lucide-react";
 import { firestore } from "@/lib/firebase";
 import { collections } from "@/constants/collections";
 import { toast } from "@/hooks/use-toast";
+import { Organ } from "@/types";
+import { EditOrgan } from "../sheets/organ/edit-organ";
+import { useRouter } from "next/router";
 
-interface PartTableMenuProps {
-  id: string;
+interface OrganTableMenuProps {
+  original: Organ;
 }
 
-export const PartTableMenu = ({ id }: PartTableMenuProps) => {
-  const [open, setOpen] = useState(false);
+export const OrganTableMenu = ({ original }: OrganTableMenuProps) => {
+  const router = useRouter();
 
-  const deletePart = async () => {
+  const [open, setOpen] = useState(false);
+  const [openPanel, setOpenPanel] = useState(false);
+  useState(false);
+
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+
+  const deleteOrgan = async () => {
     try {
       toast({
-        itemID: `delete-part-${id}`,
+        itemID: `delete-organ-${original.id}`,
         title: "Loading...",
-        description: "Deleting the part",
+        description: "Deleting the organ",
       });
-      await deleteDoc(doc(firestore, collections.parts, id));
+      await deleteDoc(doc(firestore, collections.organs, original.id));
+      refreshData();
       toast({
-        itemID: `delete-part-${id}`,
+        itemID: `delete-organ-${original.id}`,
         title: "Success",
-        description: "The part has been deleted",
+        description: "The organ has been deleted",
         variant: "success",
       });
     } catch (err) {
       console.error(err);
       toast({
-        itemID: `delete-part-${id}`,
+        itemID: `delete-organ-${original.id}`,
         title: "Erreur",
-        description: "An error occurred while deleting the part",
+        description: "An error occurred while deleting the organ",
         variant: "destructive",
       });
     }
@@ -46,28 +58,34 @@ export const PartTableMenu = ({ id }: PartTableMenuProps) => {
 
   return (
     <>
+      <EditOrgan organ={original} open={openPanel} setIsOpen={setOpenPanel} />
+
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger
           className={buttonVariants({
             variant: "ghost",
-            className: "px-2 shadow-none",
+            className: "float-right px-2 shadow-none",
           })}
         >
           <span className="sr-only">Open Menu</span>
           <Ellipsis className="size-6" />
         </PopoverTrigger>
         <PopoverContent align="end" className="flex flex-col gap-1">
-          {/* <PopoverMenuItem
+          <PopoverMenuItem
             Icon={PanelLeftOpen}
-            content="Open in panel"
-            onClick={() => {}}
-          /> */}
+            content="Edit in panel"
+            onClick={() => {
+              setOpenPanel(true);
+              setOpen(false);
+            }}
+          />
+
           <PopoverMenuItem
             variant="destructive"
             Icon={Trash}
             content="Delete"
             onClick={() => {
-              deletePart();
+              deleteOrgan();
               setOpen(false);
             }}
           />

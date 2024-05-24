@@ -50,11 +50,11 @@ const PopoverMenuItem = ({
     <button
       onClick={onClick}
       className={cn(
-        "flex w-full items-center space-x-2 rounded-md px-3 py-1.5 text-zinc-900 hover:bg-indigo-100",
+        "flex w-full items-center space-x-2 rounded-md px-3 py-1.5 text-left text-zinc-900 hover:bg-indigo-100",
         variant === "destructive" && "text-red-500 hover:bg-red-100",
       )}
     >
-      <Icon className="size-5" />
+      <Icon className="size-5 flex-shrink-0" />
       <span>{content}</span>
     </button>
   );

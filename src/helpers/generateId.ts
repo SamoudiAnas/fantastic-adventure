@@ -7,6 +7,7 @@ export enum idType {
   exitVoucher = "EXIT_VOUCHER",
   accessory = "ACCESSORY",
   rtgMachine = "RTG_MACHINE",
+  mold = "MOLD",
 }
 
 export const generateId = (idType: idType): string => {
