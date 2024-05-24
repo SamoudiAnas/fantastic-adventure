@@ -8,7 +8,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useToast } from "@/hooks/use-toast";
-
+import { interventionsTypes } from "@/constants/interventions-type";
 import { firestore } from "@/lib/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { collections } from "@/constants/collections";
@@ -18,7 +18,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Intervention, interventionSchema } from "@/types";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
 import { queryClient } from "@/pages/_app";
 import { queryKeys } from "@/constants/queryKeys";
@@ -51,7 +51,13 @@ export const AddIntervention = ({
 }: AddInterventionProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [value, setValue] = useState("");
+  const [type, setType] = useState("");
   const [isSelectOpen, setIsSelectOpen] = useState(false);
+  const [isTypeSelectOpen, setIsTypeSelectOpen] = useState(false);
+
+  useEffect(() => {
+    console.log(type);
+  }, [type]);
 
   const { data, isSuccess } = useQuery(queryKeys.organs, getAllOrgans, {
     staleTime: 1000 * 60 * 60 * 2, // 2 hours
@@ -162,6 +168,70 @@ export const AddIntervention = ({
                             )}
                           />
                           {organ.designation}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+              {errors.registrationNumber && (
+                <p className="mt-2 text-sm text-red-600">
+                  {errors.registrationNumber.message}
+                </p>
+              )}
+            </fieldset>
+
+            <fieldset className="mt-4">
+              <label htmlFor="type" className="mb-2 block">
+                Type
+              </label>
+              <Popover
+                open={isTypeSelectOpen}
+                onOpenChange={setIsTypeSelectOpen}
+              >
+                <PopoverTrigger
+                  disabled={!isSuccess}
+                  className={buttonVariants({
+                    variant: "outlined-ghost",
+                    className: "w-full justify-between",
+                  })}
+                >
+                  {type
+                    ? interventionsTypes.find(
+                        (intervention) =>
+                          intervention.value.toLowerCase() ===
+                          type.toLowerCase(),
+                      )?.label
+                    : "Select intervention type..."}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </PopoverTrigger>
+                <PopoverContent align="start" className="w-full p-0">
+                  <Command>
+                    <CommandInput placeholder="Search intervention type..." />
+                    <CommandEmpty>No type found.</CommandEmpty>
+                    <CommandGroup className="max-h-96 overflow-y-auto">
+                      {interventionsTypes.map(({ label, value }) => (
+                        <CommandItem
+                          key={value}
+                          value={value}
+                          onSelect={(currentValue) => {
+                            setType(currentValue === type ? "" : currentValue);
+                            setFormValue("type", currentValue);
+                            setIsTypeSelectOpen(false);
+                          }}
+                          className={
+                            type.toLowerCase() === value.toLowerCase()
+                              ? "bg-indigo-100"
+                              : ""
+                          }
+                        >
+                          <Check
+                            className={cn(
+                              "mr-2 h-4 w-4",
+                              type === value ? "opacity-100" : "opacity-0",
+                            )}
+                          />
+                          {label}
                         </CommandItem>
                       ))}
                     </CommandGroup>

@@ -101,6 +101,7 @@ export const AddOrgan = () => {
             <fieldset className="mt-4">
               <label htmlFor="serviceStartDate">Service Start Date</label>
               <Input
+                type="date"
                 placeholder="Service Start Date"
                 className="mt-2"
                 {...register("serviceStartDate")}

@@ -88,7 +88,7 @@ export const AddRTGMachine = () => {
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <fieldset className="mt-4">
-              <label htmlFor="organDesignation"> Designation</label>
+              <label htmlFor="organDesignation">Designation</label>
               <Input
                 placeholder="Designation"
                 className="mt-2"
@@ -103,6 +103,7 @@ export const AddRTGMachine = () => {
             <fieldset className="mt-4">
               <label htmlFor="serviceStartDate">Service Start Date</label>
               <Input
+                type="date"
                 placeholder="Service Start Date"
                 className="mt-2"
                 {...register("serviceStartDate")}

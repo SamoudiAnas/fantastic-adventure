@@ -198,6 +198,7 @@ export const AddPart = () => {
             <fieldset className="mt-4">
               <label htmlFor="receptionDate">Reception Date</label>
               <Input
+                type="date"
                 placeholder="Reception Date"
                 className="mt-2"
                 {...register("receptionDate")}
