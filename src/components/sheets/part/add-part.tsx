@@ -54,6 +54,7 @@ export const AddPart = () => {
     register,
     handleSubmit,
     reset,
+    setValue: setFormValue,
     formState: { errors },
   } = useForm<Part>({
     resolver: zodResolver(partSchema),
@@ -154,6 +155,7 @@ export const AddPart = () => {
                             setValue(
                               currentValue === value ? "" : currentValue,
                             );
+                            setFormValue("partUnit", currentValue);
                             setOpen(false);
                           }}
                           className={
