@@ -18,8 +18,10 @@ export const getServerSideProps = async () => {
   return { props: { interventions, error } };
 };
 
+type IIntervention = Intervention & {organ:Organ};
+
 interface InterventionProps {
-  interventions: Intervention &{organ:Organ} [];
+  interventions:  IIntervention[];
   error: string | null;
 }
 
@@ -38,7 +40,7 @@ export default function Home({ interventions, error }: InterventionProps) {
     columnResizeDirection: "ltr",
     onColumnFiltersChange: setColumnFilters,
     onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: "fuzzy" as FilterFnOption<Intervention>,
+    globalFilterFn: "fuzzy" as FilterFnOption<IIntervention>,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

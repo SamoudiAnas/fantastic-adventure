@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { DebouncedSearchInput } from "@/components/ui/input";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { fuzzyFilter } from "@/helpers/fuzzyFilter";
-import { Intervention } from "@/types";
+import { Intervention, Organ } from "@/types";
 import {
   ColumnFiltersState,
   FilterFnOption,
@@ -26,6 +26,9 @@ interface HistoryInterventionProps {
   open: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
+
+
+type IIntervention = Intervention & {organ:Organ};
 
 export const HistoryIntervention = ({
   organId,
@@ -49,7 +52,7 @@ export const HistoryIntervention = ({
     columnResizeDirection: "ltr",
     onColumnFiltersChange: setColumnFilters,
     onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: "fuzzy" as FilterFnOption<Intervention>,
+    globalFilterFn: "fuzzy" as FilterFnOption<IIntervention>,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
