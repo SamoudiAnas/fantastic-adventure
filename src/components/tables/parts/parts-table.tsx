@@ -5,12 +5,22 @@ import { Part } from "@/types";
 import { Table as TanstackTable, flexRender } from "@tanstack/react-table";
 import { Panel } from "@/components/ui/panel";
 import { cn } from "@/utils/cn";
+import { deleteParts } from "@/api/parts.client";
+import { queryKeys } from "@/constants/queryKeys";
+import { queryClient } from "@/pages/_app";
+import { useRouter } from "next/router";
 
 interface PartsTableProps {
   table: TanstackTable<Part>;
 }
 
 export const PartsTable = ({ table }: PartsTableProps) => {
+  const router = useRouter();
+
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };  
+
   return (
     <>
       <Table.Root
@@ -112,7 +122,14 @@ export const PartsTable = ({ table }: PartsTableProps) => {
           .getSelectedRowModel()
           .rows.map((row) => row.original.id)}
         onClear={() => table.toggleAllPageRowsSelected(false)}
-        onDelete={() => {}}
+        onDelete={async () => {
+          await deleteParts(
+            table.getSelectedRowModel().rows.map((row) => row.original.id),
+          );
+          refreshData();
+          table.toggleAllPageRowsSelected(false);
+          queryClient.invalidateQueries(queryKeys.parts);
+        }}
       />
     </>
   );

@@ -5,12 +5,22 @@ import { Organ } from "@/types";
 import { Table as TanstackTable, flexRender } from "@tanstack/react-table";
 import { Panel } from "@/components/ui/panel";
 import { cn } from "@/utils/cn";
+import { deleteOrgan, deleteOrgans } from "@/api/organs.client";
+import { useRouter } from "next/router";
+import { queryClient } from "@/pages/_app";
+import { queryKeys } from "@/constants/queryKeys";
 
 interface OrgansTableProps {
   table: TanstackTable<Organ>;
 }
 
 export const OrgansTable = ({ table }: OrgansTableProps) => {
+  const router = useRouter()
+
+  const refreshData  = ()=>{
+    router.replace(router.asPath)
+  }
+
   return (
     <>
       <Table.Root
@@ -107,12 +117,19 @@ export const OrgansTable = ({ table }: OrgansTableProps) => {
       </Table.Root>
 
       <Panel
-        dataId="parts"
+        dataId="organs"
         selectedData={table
           .getSelectedRowModel()
           .rows.map((row) => row.original.id)}
         onClear={() => table.toggleAllPageRowsSelected(false)}
-        onDelete={() => {}}
+        onDelete={async () => {
+          await deleteOrgans(
+            table.getSelectedRowModel().rows.map((row) => row.original.id),
+          );
+          refreshData();
+          table.toggleAllPageRowsSelected(false);
+          queryClient.invalidateQueries(queryKeys.organs);
+        }}
       />
     </>
   );

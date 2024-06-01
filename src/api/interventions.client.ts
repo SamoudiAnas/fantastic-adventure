@@ -3,7 +3,7 @@
 import { collections } from "@/constants/collections";
 import { toast } from "@/hooks/use-toast";
 import { firestore } from "@/lib/firebase";
-import { Intervention } from "@/types";
+import { Intervention, Organ } from "@/types";
 import {
   collection,
   getDocs,
@@ -23,20 +23,36 @@ export const getInterventionByOrganId = async (machineId: string) => {
 
     const querySnapshot = await getDocs(q);
 
+
     let interventions: Intervention[] = [];
     querySnapshot.forEach((doc) => {
       interventions.push(doc.data() as Intervention);
     });
 
+
+    const organsRef = collection(firestore, collections.organs);
+    const querySnapshotOrgans = await getDocs(organsRef);
+
+    interventions = interventions.map((intervention) => {
+      const organ = querySnapshotOrgans.docs.find(
+        (organ) => organ.id === intervention.organId.toUpperCase(),
+      )?.data();
+
+      return {
+        ...intervention,
+        organ: organ ?? {},
+      };
+    });
+
     return {
       error: null,
-      interventions: interventions as Intervention[],
+      interventions: interventions as (Intervention & {organ:Organ})[],
     };
   } catch (error) {
     console.log(error);
     return {
       error: "Something went wrong",
-      interventions: [] as Intervention[],
+      interventions: [] as (Intervention & {organ:Organ})[],
     };
   }
 };

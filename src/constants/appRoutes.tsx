@@ -30,6 +30,16 @@ export const appRoutes = {
 
 export const appLinks = [
   {
+  name: "Machine RTG",
+  path: appRoutes.rtgMachines,
+  icon: <WashingMachine className="size-5" />,
+},
+{
+  name: "Interventions",
+  path: appRoutes.interventions,
+  icon: <ShoppingBag className="size-5" />,
+},
+  {
     name: "Parts",
     path: appRoutes.parts,
     icon: <Puzzle className="size-5" />,
@@ -39,19 +49,7 @@ export const appLinks = [
     path: appRoutes.organs,
     icon: <Building2 className="size-5" />,
   },
-  {
-    name: "Commandes",
-    path: appRoutes.orders,
-    icon: <BookA className="size-5" />,
-  },
-  {
-    name: "Interventions",
-    path: appRoutes.interventions,
-    icon: <ShoppingBag className="size-5" />,
-  },
-  {
-    name: "Machine RTG",
-    path: appRoutes.rtgMachines,
-    icon: <WashingMachine className="size-5" />,
-  },
+  
+ 
+  
 ];

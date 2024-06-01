@@ -15,7 +15,7 @@ export const Header = () => {
           <PanelRight />
           <span className="sr-only">{isOpen ? "Close" : "Expand"} Sidebar</span>
         </button>
-        <h1 className="text-lg font-bold">Dashboard</h1>
+        <h1 className="text-lg font-bold">Maintenance Tracking System</h1>
       </div>
     </header>
   );

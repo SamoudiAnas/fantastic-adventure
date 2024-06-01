@@ -1,6 +1,6 @@
 import TriangleIcon from "@root/public/svgs/triangle.svg";
 import * as Table from "@/components/ui/table";
-import { Intervention } from "@/types";
+import { Intervention, Organ } from "@/types";
 
 import { Table as TanstackTable, flexRender } from "@tanstack/react-table";
 import { Panel } from "@/components/ui/panel";
@@ -11,7 +11,7 @@ import { queryClient } from "@/pages/_app";
 import { queryKeys } from "@/constants/queryKeys";
 
 interface InterventionsTableProps {
-  table: TanstackTable<Intervention>;
+  table: TanstackTable<Intervention & {organ:Organ}>;
 }
 
 export const InterventionsTable = ({ table }: InterventionsTableProps) => {

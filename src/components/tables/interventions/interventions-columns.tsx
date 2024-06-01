@@ -1,8 +1,8 @@
-import { Intervention } from "@/types";
+import { Intervention, Organ } from "@/types";
 import { Checkbox } from "@/components/ui/table";
 import { createColumnHelper } from "@tanstack/react-table";
 
-const columnHelper = createColumnHelper<Intervention>();
+const columnHelper = createColumnHelper<Intervention &{organ:Organ}>();
 
 const columns = [
   columnHelper.accessor("id", {
@@ -43,17 +43,17 @@ const columns = [
 
   columnHelper.accessor("duration", {
     header: "Duration",
-    cell: (info) => info.getValue(),
+    cell: (info) => `${info.getValue()} days`,
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor("registrationNumber", {
-    header: "Registration Number",
-    cell: (info) => info.getValue(),
+  columnHelper.accessor("organId", {
+    header: "Organ",
+    cell: (info) => info.row.original.organ.designation,
     footer: (info) => info.column.id,
   }),
   columnHelper.accessor("machineId", {
-    header: "Machine ID",
-    cell: (info) => info.getValue(),
+    header: "RTG Machine",
+    cell: (info) => `RTG Machine ${info.getValue()}`,
     footer: (info) => info.column.id,
   }),
 

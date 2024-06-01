@@ -19,9 +19,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Store, storeSchema } from "@/types";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 export const AddStore = () => {
+  const [open, setOpen] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
@@ -69,7 +70,7 @@ export const AddStore = () => {
   };
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger className={buttonVariants({ variant: "default" })}>
         Ajouter un magasin
       </SheetTrigger>
