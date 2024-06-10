@@ -261,7 +261,7 @@ export const AddIntervention = ({
             <fieldset className="mt-4">
               <label htmlFor="duration">Duration</label>
               <Input
-                placeholder="Duration (in days)"
+                placeholder="Duration (in hours)"
                 className="mt-2"
                 {...register("duration")}
               />
